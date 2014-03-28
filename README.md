@@ -1,4 +1,6 @@
-django_unchained_boilerplate
-============================
+Django Unchained boilerplate
+=============================
 
-Customed Django project boilerplate
+Get a fast environment working with the basics.
+
+![django reinhard](https://www.dropbox.com/s/htjjza0toqoho2x/reinhard.jpg)

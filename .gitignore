@@ -1,0 +1,91 @@
+#### Python bytecode ####
+*.py[co]
+*.pyc
+.DS_Store
+*.egg
+*.egg-info
+dist
+build
+eggs
+sdist
+develop-eggs
+.installed.cfg
+
+
+####  Sphinx docs  ####
+build
+
+####  SQLite3 database files  ####
+*.sqlite3
+
+# Logs:
+*.log
+
+#### Eclipse ####
+
+.project
+.pydevproject
+.settings
+
+#### Linux Editors ####
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+.elc
+auto-save-list
+tramp
+.\#*
+*.swp
+*.swo
+
+####  Mac  ####
+.DS_Store
+._*
+
+#####  Windows  ####
+Thumbs.db
+Desktop.ini
+
+
+####  Apache configuration file  ####
+.htaccess
+
+###  Sublime Text  ####
+*.sublime*
+
+####  virtualenv ####
+bin/
+lib/
+include/
+local/
+logs/
+man/
+share/
+
+#####  Todos  ####
+*.TODO
+
+
+####  Floobits  ####
+.floo
+.flooignore
+
+### BOWER PACKAGES ###
+src/static/vendor/
+
+
+#### VIRTUALENV # ###
+env
+
+####  SASS  ####
+.sass_cache/
+
+
+####  Node Modules  ####
+node_modules
+npm-debug.log
+src/node_modules
+
+
+*.log
