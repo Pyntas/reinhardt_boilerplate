@@ -79,7 +79,7 @@ src/static/vendor/
 env
 
 ####  SASS  ####
-.sass_cache/
+.sass-cache
 
 
 ####  Node Modules  ####

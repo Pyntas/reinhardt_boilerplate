@@ -125,21 +125,20 @@ USE_TZ = True
 TIME_ZONE = 'Europe/Madrid'
 
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
-MEDIA_ROOT = PROJECT_DIR.child('media')
+MEDIA_ROOT = PROJECT_DIR.child('src', 'media')
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
 MEDIA_URL = '/media/'
 
-
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
-STATIC_ROOT = PROJECT_DIR.child('assets')
+STATIC_ROOT = PROJECT_DIR.child('static')
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = '/static/'
 
 # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
 STATICFILES_DIRS = (
-    PROJECT_DIR.child('static'),
+    PROJECT_DIR.child('src', 'static'),
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
