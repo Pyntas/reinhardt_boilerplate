@@ -1,0 +1,15 @@
+User-agent: *
+Disallow:
+Disallow: /admin
+
+# Sitemap
+#http://www.example.com/sitemap.xml
+
+# Google Image
+#User-agent: Googlebot-Image
+#Disallow:
+#Allow: /*
+
+# Google Bot
+#User-agent: Googlebot
+

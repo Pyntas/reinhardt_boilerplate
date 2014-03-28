@@ -1,0 +1,85 @@
+{% load i18n %}
+{% load staticfiles %}
+{% load core_tags %}
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+
+  <title>
+    {% block title %}
+
+      Site |
+
+    {% endblock %}
+  </title>
+<!-- Les META -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+
+  {% block metatags %}
+    <meta name="description" content="">
+  {% endblock metatags %}
+
+{# Optional social tags #}
+
+<!-- Facebook metatags-->
+  <meta property="og:title" content="">
+  <meta property="og:description" content="">
+  <meta property="og:image" content="">
+  <meta property="og:url" content="">
+  <meta property="og:site_name" property="">
+
+<!-- Twitter metatags-->
+  <meta name="twitter:card" content="">
+  <meta name="twitter:site" content="">
+  <meta name="twitter:creator" content="">
+  <meta name="twitter:title" content="">
+  <meta name="twitter:description" content="">
+  <meta name="twitter:image:src" content="">
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+<!--Les Stylesheets-->
+
+  <link rel="author" href=""/>
+
+  {% block stylesheets %}
+    <link rel="stylesheet" href="">
+  {% endblock stylesheets %}
+
+
+
+</head>
+
+<body>
+
+  {# Main Header #}
+  <header></header>
+
+  {% block content %} {% endblock content %}
+
+  {# Main footer #}
+  <footer></footer>
+
+<!-- Les Scripts -->
+  <script type="{% static 'scripts/vendor/jquery/dist/jquery.min.js' %}"></script>
+
+  <!-- Google Analytics:  ANALYTICS_TRACKING_ID is your site's ID. -->
+  <script>
+    var _gaq = _gaq || []; _gaq.push(['_setAccount', '{{ ANALYTICS_TRACKING_ID }}']); _gaq.push(['_trackPageview']); (function() {var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })();
+  </script>
+
+  {% block scripts %}
+  {% endblock scripts %}
+
+</body>

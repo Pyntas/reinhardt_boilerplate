@@ -1,0 +1,17 @@
+{
+  "name": "django_unchained_boilerplate",
+  "version": "0.0.1",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~1.11.0",
+    "font-awesome": "~4.0.3"
+  }
+}
