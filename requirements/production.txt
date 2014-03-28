@@ -1,4 +1,5 @@
 Django==1.6.2
+Unipath==1.0
 bpython==0.12
 logutils==0.3.3
 South==0.8.2

@@ -1,7 +1,7 @@
-Django Unchained boilerplate
+Reinhardt boilerplate
 =============================
 
-Get a fast environment working with the basics.
+This project is the seed for a customed Django boilerplate.
 
 ![django reinhard](https://dl.dropbox.com/s/htjjza0toqoho2x/reinhard.jpg)
 
@@ -10,7 +10,7 @@ Get a fast environment working with the basics.
 
 1. Download the repo and cd into it:
 
-    `git clone <repo:url>` and `cd django_unchained_boilerplate`
+    `git clone <repo:url>` and `cd reinhardt_boilerplate`
 
 2. Virtualenv ([virtualenv](http://rukbottoland.com/blog/tutorial-de-python-virtualenv/))
 
@@ -30,6 +30,8 @@ Get a fast environment working with the basics.
 
 3. Front-end dependencies:
     To be able to run the frontend dependencies you must have installed the following packages:
+
+    > In `src` folder 
         
     0. Node [official site](http://nodejs.org/)
     1. Node Package Manager [official site](https://www.npmjs.org/doc/cli/npm-install.html)
@@ -51,7 +53,7 @@ Get a fast environment working with the basics.
 
 4. Django:
 
-    `python manage.py runserver [port]`
+    `python manage.py runserver [port]` or `./serve.sh`
 
 5. Utils:
 
@@ -59,7 +61,11 @@ Get a fast environment working with the basics.
 
         `chmod +x syncdb.sh`
 
-        `./syncdb.sh`
+        `./syncdb.sh # Give permissions chmod +x`
+
+    - Start development server in broadcast for local network listening in port 8000:
+
+        `./serve.sh# Give permissions chmod +x`
 
 ## Structure: understanding the organization.
 
