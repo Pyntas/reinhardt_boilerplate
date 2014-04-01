@@ -19,7 +19,6 @@ from django.utils.translation import ugettext_lazy as _
 
 PROJECT_DIR = Path(__file__).ancestor(3)
 
-SECRET_KEY = 'x0ti!-l45vv5tjl^r&o8e#l36xlv*)tv8qo(^m+u4s9)9m4=th'
 
 SITE_URL = "http://local.example.com:8000"
 
@@ -186,6 +185,3 @@ SOUTH_TESTS_MIGRATE = False
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 NOSE_ARGS = ['--cover-test' ,'--with-doctest' ,'--with-yanc', '--verbosity=2']
-
-#Google analytics trancking
-ANALYTICS_TRACKING_ID = 'UA-XXXXXXX-XX'

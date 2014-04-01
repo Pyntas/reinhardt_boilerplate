@@ -1,12 +1,11 @@
-"Local isolated configuration"
-from __future__ import absolute_import
+"Staging isolated configuration"
 from os import environ
-
-from .base import *
-
 # Normally you should not import ANYTHING from Django directly
 # into your settings, but ImproperlyConfigured is an exception.
 from django.core.exceptions import ImproperlyConfigured
+
+from .base import *
+
 
 
 def get_env_setting(setting):
@@ -17,13 +16,15 @@ def get_env_setting(setting):
         error_msg = "Set the %s env variable" % setting
         raise ImproperlyConfigured(error_msg)
 
-
 DEBUG = True
 
 TEMPLATE_DEBUG = DEBUG
 
-INTERNAL_IPS = ('127.0.0.1',)
-SECRET_KEY = get_env_setting("SETTINGS_KEY")
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': PROJECT_DIR.child('db.sqlite3'),
+    }
+}
 
-#Google analytics trancking
-ANALYTICS_TRACKING_ID = 'UA-XXXXXXX-XX'
+SECRET_KEY = get_env_setting('SECRET_KEY')

@@ -48,3 +48,6 @@ CACHES = {}
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 SECRET_KEY = get_env_setting('SECRET_KEY')
+
+#Google analytics trancking
+ANALYTICS_TRACKING_ID = 'UA-XXXXXXX-XX'
