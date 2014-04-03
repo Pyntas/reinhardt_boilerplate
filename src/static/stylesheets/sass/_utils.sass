@@ -1,0 +1,178 @@
+@import "compass/css3/background-size"
+@import "compass/css3/box-sizing"
+@import "core/variables"
+
+=margin($side, $size)
+  margin-#{$side}: $size
+
+=padding($side, $size)
+  padding-#{$side}: $size
+
+
+@each $side in top, left, right, bottom
+  .no-margin-#{$side}
+    +margin($side, 0)
+  .margin-#{$side}
+    +margin($side, $single)
+  .double-margin-#{$side}
+    +margin($side, $double)
+  .space-#{side}
+    +margin($side, $extra)
+
+
+@each $side in top, left, right, bottom
+  .no-padding-#{$side}
+    +padding($side, 0)
+  .padding-#{$side}
+    +padding($side, $single)
+  .double-padding-#{$side}
+    +padding($side, $double)
+  .space-#{side}
+    +padding($side, $extra)
+
+
+.margin-auto
+  +margin-auto
+
+.margin-vertical
+  margin-top: $single
+  margin-bottom: $single
+
+.double-margin-vertical
+  margin-top: $double
+  margin-bottom: $double
+
+
+
+=padding($side, $size)
+  padding-#{$side}: $size
+
+@each $side in top, left, right, bottom
+  .padding-#{$side}
+    +padding($side, $single)
+  .double-padding-#{$side}
+    +padding($side, $double)
+  .extra-padding-#{$side}
+    +padding($side, $extra)
+
+.padding-vertical
+  padding-top: $single
+  padding-bottom: $single
+
+.double-padding-vertical
+  padding-top: $double
+  padding-bottom: $double
+
+.padding
+  padding: $single
+
+.double-padding
+  padding: $double
+
+
+.half-width
+  width: 50%
+
+.float-left
+  float: left !important
+
+.float-right
+  float: right !important
+
+.pull-to-right
+  text-align: right
+
+.pull-to-left
+  text-align: left
+
+.text-center
+  text-align: center !important
+
+.background
+  background-repeat: no-repeat
+  &.cover
+    +background-size(cover)
+    background-position: center
+  &.full
+    +background-size(100%)
+    background-position: center
+
+
+=clearfix
+  *zoom: 1
+  &:before, &:after
+    content: '\0020'
+    display: block
+    overflow: hidden
+    visibility: hidden
+    width: 0
+    height: 0
+  &:after
+    clear: both
+
+.clearfix
+  +clearfix
+
+.clear
+  clear: both
+
+.border-box
+  +box-sizing(border-box)
+
+.inline
+  display: inline
+
+.inline-block
+  display: inline-block
+
+.block
+  display: block
+
+.show
+  display: block !important
+
+.hidden
+  display: none
+
+.container-vertical-centered
+  display: table !important
+  width: 100%
+  .centered
+    display: table-cell !important
+    vertical-align: middle
+    float: none
+
+
+.opacity-100
+  +opacity(1)
+.opacity-65
+  +opacity(.65)
+.opacity-50
+  +opacity(.5)
+.opacity-35
+  +opacity(.35)
+
+
+.pointer
+  &:hover
+    cursor: pointer
+
+.relative
+  position: relative
+
+
+.absolute
+  position: absolute
+
+
+.mobile-to-mobile-landscape-hidden
+  +mq(mobile-to-mobile-landscape)
+    display: none !important
+
+.mobile-hidden
+  +mq(mobile)
+    display: none !important
+
+.mobile-full-width
+  @media (max-width: 767px)
+    width: 100%

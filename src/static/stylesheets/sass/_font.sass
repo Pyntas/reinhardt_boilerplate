@@ -1,0 +1,92 @@
+@import "mixins"
+@import "core/variables"
+
+
+h1
+  +font-size(26)
+h2
+  +font-size(22)
+h3
+  +font-size(18)
+h4
+  +font-size(16)
+h5
+  +font-size(13)
+h6
+  +font-size(10)
+
+.text
+  line-height: initial
+
+
+.text, .lowercase-text, h1, h2, h3, h4, h5, h6, i
+  &.zero-space
+    letter-spacing: 0pt
+  &.opened
+    letter-spacing: 3pt
+  &.wide
+    letter-spacing: 7pt
+  &.super-wide
+    letter-spacing: 12pt
+  &.thin
+    font-weight: $fontThin
+  &.light
+    font-weight: $fontLight
+  &.regular
+    font-weight: $fontRegular
+  &.medium
+    font-weight: $fontMedium
+  &.bold
+    font-weight: $fontBold
+  &.uppercase
+    text-transform: uppercase
+  &.lowercase
+    text-transform: lowercase
+  &.no-transform
+    text-transform: none
+  &.minuscule
+    font-size: $fontMinuscule
+  &.tiny
+    font-size: $fontSizeTiny
+  &.smaller
+    +font-size(13)
+  &.small
+    +font-size(14)
+  &.minimum
+    +font-size(16)
+  &.large
+    +font-size(18)
+  &.big
+    +font-size(25)
+  &.bigger
+    +font-size(32)
+  &.biggest
+    +font-size(42)
+  &.insane
+    +font-size(72)
+  &.huge
+    +font-size(140)
+
+
+  &.justify
+    text-align: justify
+  &.right
+    text-align: right
+  &.left
+    text-align: left
+  &.center
+    text-align: center
+  &.underline
+    text-decoration: underline
+
+  @each $a in $available-colors
+    &.color.#{nth($a, 1)}
+      color: nth($a, 2)
+
+// Mixin to smooth fonts
+=font_smoothing($val: antialiased)
+  -webkit-font-smoothing: $val
+  -moz-font-smoothing: $val
+  -ms-font-smoothing: $val
+  -o-font-smoothing: $val
+  font-smoothing: $val
