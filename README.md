@@ -99,3 +99,19 @@ There is a file located in the root folder called `.editorconfig` which contains
 Install the plugin for your editor, and make sure this file is in your project.
 
 EditorConfig [official site](http://editorconfig.org/)
+
+
+
+## Translations
+
+The folder `locale` contains the language folders with the `.po` files to translate.
+This folder is specified in the settings with `LOCALE_PATH`.
+
+Run `django-admin.py makemessages -l <lang>` to generate the strings from your code and then translate them. 
+
+After that, you can compile the messages by running `django-amdin.py compilemessages`.
+
+
+Compiles .po files created by makemessages to .mo files for use with the builtin gettext support.
+
+You can use for example, a GUI tool like [POEDIT](http://www.poedit.net/download.php) to open and translate the files.
