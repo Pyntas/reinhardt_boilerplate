@@ -1,0 +1,6 @@
+{
+  "staticDir": "static",
+  "stylesDir": "static/stylesheets",
+  "scriptsDevDir": "static/scripts/dev",
+  "scriptsBuildDir": "static/scripts/build",
+}

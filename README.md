@@ -75,31 +75,36 @@ This project is the seed for a customed Django boilerplate.
 - **web** contains the code related to the web application
 
 - **static** Contains the static files for the main apps.
-    3rd party static files are stored in *vendor* folder (bower packages)
+    - **images**: Where the images of your app are.
+    - **scripts**: The javascript files divided in *dev* and *build*.
+    - **stylesheets** The stylesheets divided in *css* and *sass*.
+    - **vendor** 3rd party files downloaded by running `bower install` in the src folder.
 
-- **media** contains mainly images or other files uploaded.
+- **media** contains mainly images or other files uploaded by users, like the admin user.
 
 - **templates** Contains the templates related to each app. Directory specified in base settings.
 
-- **vendor** contains 3rd party libraries. i.e.: facebook.
+- **vendor** contains 3rd party libraries not installed through `pip`.
 
 - **tests** contains the tests for you projects. Check tests section to follow great TDD philosophy.
 
 Other important configuration files:
 
 - **settings** This package contains the specific settings for the different
-develop stages. `local.py` for development and `production.py` for production. Both take some base configuraton from `base.py`.
+develop stages. The file`local.py` for development and `production.py` for production. Both take some base configuraton from `base.py`.
 
 
-## Code conventions:
 
-There is a file located in the root folder called `.editorconfig` which contains the main settings to write code in your text editor following basic conventions
+## GRUNT
 
+Once you installed the `bower` packages (`bower install`) and node packages used by **grunt** (`npm install`) you will be able to extend your Gruntfile as it comes with a basic configuration.
+###Commands:
 
-Install the plugin for your editor, and make sure this file is in your project.
+`grunt` will run *default* task specified in the Gruntfile.js
 
-EditorConfig [official site](http://editorconfig.org/)
+`grunt watch` on your files changes will run a serie of tasks. By default just for compass.
 
+`grunt build` prepares the files for production. Combines, minifies, uglifies ...
 
 
 ## Translations
@@ -115,3 +120,13 @@ After that, you can compile the messages by running `django-amdin.py compilemess
 Compiles .po files created by makemessages to .mo files for use with the builtin gettext support.
 
 You can use for example, a GUI tool like [POEDIT](http://www.poedit.net/download.php) to open and translate the files.
+
+
+## Code conventions:
+
+There is a file located in the root folder called `.editorconfig` which contains the main settings to write code in your text editor following basic conventions
+
+
+Install the plugin for your editor, and make sure this file is in your project.
+
+EditorConfig [official site](http://editorconfig.org/)
