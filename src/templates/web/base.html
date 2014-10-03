@@ -1,21 +1,25 @@
 {% load i18n %}
 {% load staticfiles %}
+
 {% load core_tags %}
+{% get_current_language as lang_code %}
+
 
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7 ]><html class="ie ie6" lang="{{ lang_code }}"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="{{ lang_code }}"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="{{ lang_code }}"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="{{ lang_code }}"> <!--<![endif]-->
 <head>
 
   <title>
     {% block title %}
 
-      Site |
+      Reinhardt |
 
     {% endblock %}
   </title>
+
 <!-- Les META -->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,11 +29,11 @@
   <meta name="description" content="">
 
   {% block metatags %}
-    <meta name="description" content="">
+  <meta name="description" content="">
   {% endblock metatags %}
 
-{# Optional social tags #}
 
+  {% block social_tags %}
 <!-- Facebook metatags-->
   <meta property="og:title" content="">
   <meta property="og:description" content="">
@@ -45,21 +49,29 @@
   <meta name="twitter:description" content="">
   <meta name="twitter:image:src" content="">
 
+  {% endblock social_tags %}
+
   <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
 
-<!--Les Stylesheets-->
+  <!--Les Stylesheets-->
+    <link rel="author" href=""/>
+  {% for lang in LANGUAGES %}
+    <link rel="alternate" hreflang="{{ lang.0 }}" href="{{ SITE_URL }}/{{ lang.0 }}">
+  {% endfor %}
 
-  <link rel="author" href=""/>
 
   {% block stylesheets %}
     <link rel="stylesheet" href="{% static 'stylesheets/css/reinhardt_boilerplate.css' %}">
   {% endblock stylesheets %}
 
 
+  {% block extrahead %} {% endblock extrahead %}
 
 </head>
+
+
 
 <body>
 
@@ -71,8 +83,19 @@
   {# Main footer #}
   <footer></footer>
 
-<!-- Les Scripts -->
-  <script type="{% static 'scripts/vendor/jquery/dist/jquery.min.js' %}"></script>
+
+
+
+  {# Javascripts for local or production according to DEBUG settings variable#}
+  {% if debug %}
+
+    <script type="text/javascript" src='{% static "vendor/jquery/dist/jquery.min.js" %}'></script>
+  {% else %}
+
+    <script type="text/javascript" src='{% static "scripts/build/reduced_vendor.min.js" %}'></script>
+    <script type="text/javascript" src='{% static "scripts/build/reinhardt_boilerplate.min.js" %}'></script>
+
+  {% endif %}
 
   <!-- Google Analytics:  ANALYTICS_TRACKING_ID is your site's ID. -->
   <script>

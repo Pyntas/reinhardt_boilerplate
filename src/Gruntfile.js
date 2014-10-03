@@ -1,7 +1,9 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    config: grunt.file.readJSON('config.json'),
+    config: grunt.file.readJSON('package.json').config,
+    bower: grunt.file.readJSON('.bowerrc'),
+
     compass: {
       dist: {
         options: {
@@ -13,64 +15,82 @@ module.exports = function(grunt) {
         }
       }
     },
+
+    // Concat JS files from the app and the vendor libraries used
     concat: {
       app: {
-        src: ['<%= config.scriptsDevDir %>/**/*.js'],
+        src: '<%= config.scriptsDevDir %>/app/**/*.js',
         dest: '<%= config.scriptsBuildDir %>/<%= pkg.name %>.js'
       },
-      vendor: {
-        src: [
-          '<%= config.staticDir %>/vendor/jquery/dist/jquery.min.js',
-          '<%= config.staticDir %>/vendor/bootstrap/dist/js/bootstrap.min.js',
+
+      reduced_vendor: {
+        src: ['<%= bower.directory %>/jquery/dist/jquery.js',
+              '<%= bower.directory %>/bootstrap/js/bootstrap.js',
         ],
-        dest: '<%= config.scriptsBuildDir %>/vendor.js'
+        dest: '<%= config.scriptsBuildDir %>/reduced_vendor.js'
       }
     },
+
+    // Uglify and minified concatenated files
     uglify: {
       options: {
-        // sourceMap: true,
-        // sourceMapIncludeSources: true,
+        sourceMap: true,
+        sourceMapIncludeSources: true,
         banner: '/*! <%= pkg.name %>  */\n'
       },
       dist: {
         files: {
           '<%= config.scriptsBuildDir %>/<%= pkg.name %>.min.js': ['<%= concat.app.dest %>'],
-          '<%= config.scriptsBuildDir %>/vendor.min.js': ['<%= concat.vendor.dest %>'],
+          '<%= config.scriptsBuildDir %>/reduced_vendor.min.js': ['<%= concat.reduced_vendor.dest %>'],
         }
       }
     },
+
+    // Minify css and generated css files
     cssmin: {
       combine: {
         files: {
-          '<%= config.stylesDir %>/<%= pkg.name %>.min.css': ['<%= config.stylesDir %>/**/*.css'],
+          '<%= config.stylesDir %>/<%= pkg.name %>.css': [
+            '<%= config.stylesDir %>/css/**/*.css'
+          ],
         }
       },
+      minify: {
+        expand: true,
+        cwd: '<%= config.stylesDir %>/',
+        src: ['<%= pkg.name %>.css',],
+        dest: '<%= config.stylesDir %>/',
+        ext: '.min.css'
+      }
     },
+
+    // Watch file changes to execute the task
     watch: {
       compass: {
         files: '<%= config.stylesDir %>/**/*.{scss,sass}',
         tasks: ['compass']
       },
-      // Add tasks here to run on every file saved change, as you would do for coffeescript,
-    },
-    shell: {
-      runserver: {
-          command: function(settings){
-            if (settings){
-              return 'echo running <%= pkg.name %> with settings'+settings+' && '+'python manage.py runserver --settings=settings.'+settings;
-            } else {
 
-              return 'echo running <%= pkg.name %> with settings local && python manage.py runserver --settings=settings.local';
-            }
-          },
-          options: {
-            stdout: true
-          }
+      scripts: {
+        files: ['<%= config.scriptsDevDir %>/app/**/*.js',
+
+        ],
+        tasks: ['concat:app', ],
+        options: {
+          interrupt: true,
+        }
       }
     }
+
   });
 
 
+
+  grunt.registerTask('css', ['compass', 'cssmin']);
+
+  grunt.registerTask('js', ['concat', 'uglify']);
+
+  // Prepare for production
   grunt.registerTask('build',
     ['compass', 'cssmin', 'concat', 'uglify']);
 
@@ -80,9 +100,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
 
 
-  grunt.registerTask('default',['watch']); // task by  running just grunt.
-  grunt.registerTask('serve', ['shell:runserver']); // run server
-}
+  grunt.registerTask('default',['watch']); // task by running just `grunt` command.
+};
+

@@ -1,36 +1,35 @@
 # -*- coding: utf-8 -*-
-
-# from os.path import abspath, basename, dirname, join, normpath
-# from sys import path
-from unipath import Path
+from os.path import abspath, basename, dirname, join
+from sys import path
 
 
 from django.utils.translation import ugettext_lazy as _
 
 # Absolute filesystem path to the Django project directory:
-# DJANGO_ROOT = dirname(dirname(abspath(__file__)))
+BASE_DIR = dirname(dirname(abspath(__file__)))
 # # Absolute filesystem path to the top-level project folder:
-# SITE_ROOT = dirname(DJANGO_ROOT)
+SITE_ROOT = dirname(BASE_DIR)
 
-# SITE_NAME = basename(DJANGO_ROOT)
+SITE_NAME = basename(BASE_DIR)
 # # Add our project to our pythonpath, this way we don't need to type our project
 # # name in our dotted import paths:
-# path.append(DJANGO_ROOT)
-
-PROJECT_DIR = Path(__file__).ancestor(3)
+path.append(BASE_DIR)
 
 
-SITE_URL = "http://local.example.com:8000"
+
+SITE_URL = "http://localhost:8000"
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
+
+TESTING = True #no attached to debug. Can be used to avoid stuff in local/staging development
 
 #See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = []
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#admins & #managers
 ADMINS = (
-    ('Hello my name is', 'your_email@example.com'),
+    ('Django Reinhardt', 'admin@email.com'),
 )
 MANAGERS = ADMINS
 
@@ -58,6 +57,10 @@ LOCAL_APPS = (
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
 
+INSTALLED_APPS += (
+    'django_nose',
+)
+
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -83,6 +86,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 TEMPLATE_CONTEXT_PROCESSORS += (
     'core.context_processors.analytics',
+    'core.context_processors.i18n_extended',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-loaders
@@ -93,28 +97,29 @@ TEMPLATE_LOADERS = (
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
 TEMPLATE_DIRS = (
-    PROJECT_DIR.child('src', 'templates'),
+    join(BASE_DIR, 'templates'),
 )
 
 
 # Database
-# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
+# https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': PROJECT_DIR.child('db.sqlite3'),
+        'NAME': join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
 # Internationalization
-# https://docs.djangoproject.com/en/1.6/topics/i18n/
+# https://docs.djangoproject.com/en/1.7/topics/i18n/
 LANGUAGE_CODE = 'en-us'
 LANGUAGES = (
     ('en', _('English')),
     ('es', _('Spanish')),
 )
+
 LOCALE_PATHS = (
-    PROJECT_DIR.child('src').child('locale'),
+    join(BASE_DIR, 'locale'),
 )
 
 USE_I18N = True
@@ -123,21 +128,22 @@ USE_TZ = True
 
 TIME_ZONE = 'Europe/Madrid'
 
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
-MEDIA_ROOT = PROJECT_DIR.child('src', 'media')
+# https://docs.djangoproject.com/en/1.7/howto/static-files/
+MEDIA_ROOT = join(BASE_DIR, 'media')
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
 MEDIA_URL = '/media/'
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
-STATIC_ROOT = PROJECT_DIR.child('static')
+STATIC_ROOT = join(SITE_ROOT, 'static')
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = '/static/'
 
 # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
+
 STATICFILES_DIRS = (
-    PROJECT_DIR.child('src', 'static'),
+    join(BASE_DIR,  'static'),
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
@@ -171,17 +177,3 @@ LOGGING = {
         },
     }
 }
-
-
-
-INSTALLED_APPS += (
-    'south',
-    'django_nose',
-)
-
-# Don't need to use South when setting up a test database.
-SOUTH_TESTS_MIGRATE = False
-
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-
-NOSE_ARGS = ['--cover-test' ,'--with-doctest' ,'--with-yanc', '--verbosity=2']
